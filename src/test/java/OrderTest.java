@@ -44,8 +44,8 @@ public class OrderTest {
         form.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Захаров Даниил");
         form.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79154230549");
         // driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
-        driver.findElement(By.cssSelector("[class='checkbox__box']")).click();
-        driver.findElement(By.cssSelector("[class='button__text']")).click();
+        form.findElement(By.cssSelector("[class='checkbox__box']")).click();
+        form.findElement(By.cssSelector("[class='button__text']")).click();
         WebElement result = driver.findElement(By.cssSelector("[data-test-id='order-success']"));
         assertTrue(result.isDisplayed());
         assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.",result.getText().trim());
@@ -54,8 +54,10 @@ public class OrderTest {
     @Test
     void shouldMessageEnterName() {
         WebElement form = driver.findElement(By.cssSelector("form"));
-        driver.findElement(By.cssSelector("[class='button__text']")).click();
-        WebElement message = form.findElement(By.cssSelector("[data-test-id='name'] [class='input__sub']"));
+        form.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79154230549");
+        form.findElement(By.cssSelector("[class='checkbox__box']")).click();
+        form.findElement(By.cssSelector("[class='button__text']")).click();
+        WebElement message = form.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub"));
         assertTrue(message.isDisplayed());
         assertEquals("Поле обязательно для заполнения",message.getText().trim());
     }
@@ -65,8 +67,10 @@ public class OrderTest {
         WebElement form = driver.findElement(By.cssSelector("form"));
         form.findElement(By.cssSelector("[data-test-id='name'] input"))
                 .sendKeys("Zaharov Daniil");
-        driver.findElement(By.cssSelector("[class='button__text']")).click();
-        WebElement message = form.findElement(By.cssSelector("[data-test-id='name'] [class='input__sub']"));
+        form.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79154230549");
+        form.findElement(By.cssSelector("[class='checkbox__box']")).click();
+        form.findElement(By.cssSelector("[class='button__text']")).click();
+        WebElement message = form.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub"));
         assertTrue(message.isDisplayed());
         assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.",message.getText().trim());
     }
@@ -76,8 +80,9 @@ public class OrderTest {
         WebElement form = driver.findElement(By.cssSelector("form"));
         form.findElement(By.cssSelector("[data-test-id='name'] input"))
                 .sendKeys("Захаров Даниил");
-        driver.findElement(By.cssSelector("[class='button__text']")).click();
-        WebElement message = form.findElement(By.cssSelector("[data-test-id='phone'] [class='input__sub']"));
+        form.findElement(By.cssSelector("[class='checkbox__box']")).click();
+        form.findElement(By.cssSelector("[class='button__text']")).click();
+        WebElement message = form.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub"));
         assertTrue(message.isDisplayed());
         assertEquals("Поле обязательно для заполнения",message.getText().trim());
     }
@@ -89,8 +94,9 @@ public class OrderTest {
                 .sendKeys("Захаров Даниил");
         form.findElement(By.cssSelector("[data-test-id='phone'] input"))
                 .sendKeys("111");
-        driver.findElement(By.cssSelector("[class='button__text']")).click();
-        WebElement message = form.findElement(By.cssSelector("[data-test-id='phone'] [class='input__sub']"));
+        form.findElement(By.cssSelector("[class='checkbox__box']")).click();
+        form.findElement(By.cssSelector("[class='button__text']")).click();
+        WebElement message = form.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub"));
         assertTrue(message.isDisplayed());
         assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.",message.getText().trim());
     }
@@ -101,8 +107,8 @@ public class OrderTest {
             form.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Захаров Даниил");
             form.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79154230549");
             // driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
-            driver.findElement(By.cssSelector("[class='button__text']")).click();
-            WebElement ask = form.findElement(By.cssSelector("[class='checkbox checkbox_size_m checkbox_theme_alfa-on-white input_invalid']"));
+            form.findElement(By.cssSelector("[class='button__text']")).click();
+            WebElement ask = form.findElement(By.cssSelector("[data-test-id='agreement'].input_invalid"));
             assertTrue(ask.isDisplayed());
     }
 }
